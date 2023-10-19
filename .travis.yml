@@ -13,3 +13,10 @@ after_success:
   - docker build -t daytalker/multi-server ./server
   - docker build -t daytalker/multi-worker ./worker
   - docker build -t daytalker/multi-nginx ./nginx
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push daytalker/multi-client
+  - docker push daytalker/multi-server
+  - docker push daytalker/multi-worker
+  - docker push daytalker/multi-nginx
